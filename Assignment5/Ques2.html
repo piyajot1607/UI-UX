@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 5 - Q2</title>
+</head>
+<body>
+  <h2>Q2: Array Operations</h2>
+  <script>
+    let arr = [];
+    for (let i = 0; i < 5; i++) {
+      arr.push(parseFloat(prompt("Enter number " + (i + 1))));
+    }
+
+    let largest = Math.max(...arr);
+    let smallest = Math.min(...arr);
+
+    document.write("Array: " + arr + "<br>");
+    document.write("Largest: " + largest + "<br>");
+    document.write("Smallest: " + smallest + "<br>");
+    document.write("Ascending: " + [...arr].sort((a,b)=>a-b) + "<br>");
+    document.write("Descending: " + [...arr].sort((a,b)=>b-a) + "<br>");
+  </script>
+</body>
+</html>

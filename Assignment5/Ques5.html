@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 5 - Q5</title>
+</head>
+<body>
+  <h2>Q5: Array Methods</h2>
+  <script>
+    let nums = [];
+    for (let i = 0; i < 5; i++) {
+      nums.push(parseFloat(prompt("Enter number " + (i + 1))));
+    }
+
+    let evenNums = nums.filter(n => n % 2 === 0);
+    let doubled = evenNums.map(n => n * 2);
+    let sum = doubled.reduce((acc, n) => acc + n, 0);
+
+    document.write("Original array: " + nums + "<br>");
+    document.write("Even numbers: " + evenNums + "<br>");
+    document.write("Doubled numbers: " + doubled + "<br>");
+    document.write("Sum of doubled numbers: " + sum + "<br>");
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 5 - Q4</title>
+</head>
+<body>
+  <h2>Q4: Student Object</h2>
+  <script>
+    let student = {
+      name: "John",
+      age: 20,
+      grade: "B"
+    };
+
+    // Add new property
+    student.class = "CS";
+    // Update grade
+    student.grade = "A";
+
+    for (let key in student) {
+      document.write(key + ": " + student[key] + "<br>");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpringFest 2025 - College Event</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #764ba2;
+        }
+
+        main {
+            background: white;
+            margin: 2rem auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            min-height: 80vh;
+        }
+
+        .page {
+            display: none;
+            padding: 3rem;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 4rem 2rem;
+            margin: -3rem -3rem 3rem -3rem;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .event-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .events-list {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .event-item {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 5px solid #764ba2;
+            transition: all 0.3s ease;
+        }
+
+        .event-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .event-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(118, 75, 162, 0.3);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+
+        .social-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(118, 75, 162, 0.3);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: #f8f9ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .page {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">SpringFest 2025</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')" class="active">Home</a></li>
+                <li><a href="#" onclick="showPage('events')">Events</a></li>
+                <li><a href="#" onclick="showPage('schedule')">Schedule</a></li>
+                <li><a href="#" onclick="showPage('register')">Register</a></li>
+                <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact & FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div id="home" class="page active">
+            <div class="hero">
+                <h1>SpringFest 2025</h1>
+                <p><strong>March 15-17, 2025</strong></p>
+                <p>Join us for three days of incredible competitions, entertainment, and unforgettable memories at the biggest college event of the year!</p>
+            </div>
+            
+            <div class="event-info">
+                <div class="info-card">
+                    <h3>🎭 Multiple Competitions</h3>
+                    <p>Dance, Music, Drama, Sports, Tech, and more exciting competitions await!</p>
+                </div>
+                <div class="info-card">
+                    <h3>🏆 Amazing Prizes</h3>
+                    <p>Win cash prizes, trophies, and exclusive merchandise worth thousands!</p>
+                </div>
+                <div class="info-card">
+                    <h3>🎪 Entertainment</h3>
+                    <p>Live performances, food stalls, and non-stop fun throughout the festival!</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0;">
+                <button class="btn" onclick="showPage('register')">Register Now</button>
+            </div>
+        </div>
+        <div id="events" class="page">
+            <h2>Competition Events</h2>
+            <div class="events-list">
+                <div class="event-item">
+                    <h3>🎵 Music Competition</h3>
+                    <p><strong>Categories:</strong> Solo Singing, Band Performance, Instrumental</p>
+                    <p><strong>Prize:</strong> ₹15,000 for winners</p>
+                    <p>Showcase your musical talent and compete with the best performers from across colleges.</p>
+                </div>
+                
+                <div class="event-item">
+                    <h3>💃 Dance Competition</h3>
+                    <p><strong>Categories:</strong> Solo Dance, Group Dance, Choreography</p>
+                    <p><strong>Prize:</strong> ₹12,000 for winners</p>
+                    <p>Express yourself through movement and rhythm in this high-energy competition.</p>
+                </div>
+
+                <div class="event-item">
+                    <h3>🎭 Drama & Theatre</h3>
+                    <p><strong>Categories:</strong> Street Play, Mono Acting, Skit Performance</p>
+                    <p><strong>Prize:</strong> ₹10,000 for winners</p>
+                    <p>Bring stories to life and captivate audiences with your dramatic skills.</p>
+                </div>
+
+                <div class="event-item">
+                    <h3>🏃 Sports Events</h3>
+                    <p><strong>Categories:</strong> Cricket, Football, Basketball, Athletics</p>
+                    <p><strong>Prize:</strong> ₹20,000 for winners</p>
+                    <p>Compete in various sports and prove your athletic prowess.</p>
+                </div>
+
+                <div class="event-item">
+                    <h3>💻 Tech Competition</h3>
+                    <p><strong>Categories:</strong> Coding Contest, App Development, Robotics</p>
+                    <p><strong>Prize:</strong> ₹25,000 for winners</p>
+                    <p>Innovation meets competition in these exciting tech challenges.</p>
+                </div>
+
+                <div class="event-item">
+                    <h3>🎨 Creative Arts</h3>
+                    <p><strong>Categories:</strong> Painting, Photography, Digital Art, Crafts</p>
+                    <p><strong>Prize:</strong> ₹8,000 for winners</p>
+                    <p>Let your creativity shine through various artistic mediums.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCHEDULE PAGE -->
+        <div id="schedule" class="page">
+            <h2>Event Schedule & Results</h2>
+            
+            <h3>Day 1 - March 15, 2025</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Event</th>
+                        <th>Venue</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9:00 AM</td>
+                        <td>Registration & Welcome</td>
+                        <td>Main Auditorium</td>
+                        <td>✅ Completed</td>
+                    </tr>
+                    <tr>
+                        <td>10:30 AM</td>
+                        <td>Tech Competition (Coding)</td>
+                        <td>Computer Lab</td>
+                        <td>⏳ In Progress</td>
+                    </tr>
+                    <tr>
+                        <td>11:00 AM</td>
+                        <td>Music Competition (Solo)</td>
+                        <td>Music Hall</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 PM</td>
+                        <td>Dance Competition (Group)</td>
+                        <td>Main Stage</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>4:00 PM</td>
+                        <td>Creative Arts Exhibition</td>
+                        <td>Art Gallery</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Day 2 - March 16, 2025</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Event</th>
+                        <th>Venue</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9:00 AM</td>
+                        <td>Sports Events (Cricket)</td>
+                        <td>Sports Ground</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>10:00 AM</td>
+                        <td>Drama Competition</td>
+                        <td>Theatre Hall</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 PM</td>
+                        <td>Music Competition (Band)</td>
+                        <td>Main Stage</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>4:00 PM</td>
+                        <td>Dance Competition (Solo)</td>
+                        <td>Dance Studio</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>7:00 PM</td>
+                        <td>Cultural Night</td>
+                        <td>Main Auditorium</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Day 3 - March 17, 2025</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Event</th>
+                        <th>Venue</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9:00 AM</td>
+                        <td>Sports Finals</td>
+                        <td>Sports Complex</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>11:00 AM</td>
+                        <td>Tech Competition Finals</td>
+                        <td>Innovation Hub</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 PM</td>
+                        <td>Grand Finale Performances</td>
+                        <td>Main Stage</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>5:00 PM</td>
+                        <td>Award Ceremony</td>
+                        <td>Main Auditorium</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>7:00 PM</td>
+                        <td>Closing Celebration</td>
+                        <td>Campus Grounds</td>
+                        <td>📅 Scheduled</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- REGISTRATION PAGE -->
+        <div id="register" class="page">
+            <h2>Event Registration</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="college">College/University *</label>
+                    <input type="text" id="college" name="college" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="year">Year of Study *</label>
+                    <select id="year" name="year" required>
+                        <option value="">Select Year</option>
+                        <option value="1st">1st Year</option>
+                        <option value="2nd">2nd Year</option>
+                        <option value="3rd">3rd Year</option>
+                        <option value="4th">4th Year</option>
+                        <option value="postgrad">Post Graduate</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="events">Select Events to Participate (Hold Ctrl to select multiple) *</label>
+                    <select id="events" name="events" multiple required size="6">
+                        <option value="music-solo">Music Competition - Solo</option>
+                        <option value="music-band">Music Competition - Band</option>
+                        <option value="dance-solo">Dance Competition - Solo</option>
+                        <option value="dance-group">Dance Competition - Group</option>
+                        <option value="drama">Drama & Theatre</option>
+                        <option value="sports-cricket">Sports - Cricket</option>
+                        <option value="sports-football">Sports - Football</option>
+                        <option value="sports-basketball">Sports - Basketball</option>
+                        <option value="tech-coding">Tech - Coding Contest</option>
+                        <option value="tech-app">Tech - App Development</option>
+                        <option value="creative-arts">Creative Arts</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Previous Experience/Achievements (Optional)</label>
+                    <textarea id="experience" name="experience" rows="4" placeholder="Tell us about your previous experience in competitions or relevant achievements..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietary">Dietary Restrictions (Optional)</label>
+                    <input type="text" id="dietary" name="dietary" placeholder="Any food allergies or dietary preferences">
+                </div>
+
+                <div class="form-group">
+                    <label for="emergency">Emergency Contact *</label>
+                    <input type="text" id="emergency" name="emergency" required placeholder="Name and phone number">
+                </div>
+
+                <button type="submit" class="btn">Register Now</button>
+            </form>
+        </div>
+
+        <!-- GALLERY PAGE -->
+        <div id="gallery" class="page">
+            <h2>Photo Gallery</h2>
+            <p>Memories from previous SpringFest events and exciting moments!</p>
+            
+            <h3>SpringFest 2024 Highlights</h3>
+            <div class="gallery">
+                <div class="gallery-item"><img class="gallery-img" src="./gallery/music.jpg" alt="music night"></div>
+                <div class="gallery-item"><img class="gallery-img" src="./gallery/award.jpg" alt="music night"></div>
+                <div class="gallery-item"><img class="gallery-img" src="./gallery/culture.jpg" alt="music night"></div>
+                <div class="gallery-item"><img class="gallery-img" src="./gallery/dance.jpg" alt="music night"></div>
+                <div class="gallery-item"><img class="gallery-img" src="./gallery/drama.jpg" alt="music night"></div>
+                <div class="gallery-item"><img class="gallery-img" src="./gallery/food.jpg" alt="music night"></div>
+                <div class="gallery-item"><img class="gallery-img" src="./gallery/live.jpg" alt="music night"></div>
+                <div class="gallery-item"><img class="gallery-img" src="./gallery/opening.jpg" alt="music night"></div>
+                <div class="gallery-item"><img class="gallery-img" src="./gallery/team.jpg" alt="music night"></div>
+            </div>
+
+            
+        </div>
+
+        <!-- CONTACT & FAQ PAGE -->
+        <div id="contact" class="page">
+            <h2>Contact Information</h2>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3>🎯 Event Coordinator</h3>
+                    <p>Priya Sharma</p>
+                    <p>priya.events@college.edu</p>
+                    <p>+91 87654 3XXXX</p>
+                </div>
+                <div class="contact-card">
+                    <h3>💻 Technical Support</h3>
+                    <p>tech.support@college.edu</p>
+                    <p>+91 76543 2XXXX</p>
+                </div>
+                <div class="contact-card">
+                    <h3>🏢 College Office</h3>
+                    <p>Thapar University</p>
+                    <p>Patiala</p>
+                    <p>Office Hours: 9 AM - 6 PM</p>
+                </div>
+            </div>
+
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is there a registration fee?</div>
+                <div class="faq-answer">Registration is completely free for all participants! We believe in making SpringFest accessible to everyone.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I participate in multiple events?</div>
+                <div class="faq-answer">Yes! You can register for multiple events. Just make sure to check the schedule to avoid timing conflicts.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What should I bring for the events?</div>
+                <div class="faq-answer">Bring your college ID, any equipment specific to your event (musical instruments, sports gear), and enthusiasm! Food and refreshments will be provided.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Are there accommodation facilities?</div>
+                <div class="faq-answer">We can help arrange accommodation in nearby hostels or budget hotels. Contact us early for assistance with bookings.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What are the prizes?</div>
+                <div class="faq-answer">Each category has cash prizes, trophies, and certificates. Total prize pool is over ₹1,00,000 across all events!</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How will I know if I'm selected?</div>
+                <div class="faq-answer">You'll receive a confirmation email within 48 hours of registration. Follow-up emails with event details will be sent closer to the date.</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Handle form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const selectedEvents = Array.from(document.getElementById('events').selectedOptions)
+                                      .map(option => option.text);
+            
+            // Show success message
+            alert(`Thank you for registering, ${formData.get('fullName')}!\n\nYou've registered for:\n${selectedEvents.join('\n')}\n\nYou'll receive a confirmation email within 24 hours.`);
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                alert('🎉 Full gallery coming soon! This will open a detailed photo viewer.');
+            });
+        });
+
+        // Add smooth scrolling for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add entrance animation
+            setTimeout(() => {
+                document.querySelector('.hero').style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
